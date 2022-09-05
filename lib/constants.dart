@@ -6,6 +6,8 @@ const kSendButtonTextStyle = TextStyle(
   fontSize: 18.0,
 );
 const kTag = 'logo';
+const kLoginButtonColor = Colors.lightBlueAccent;
+const kRegisterButtonColor = Colors.blueAccent;
 const kMessageTextFieldDecoration = InputDecoration(
   contentPadding: EdgeInsets.symmetric(vertical: 10.0, horizontal: 20.0),
   hintText: 'Type your message here...',

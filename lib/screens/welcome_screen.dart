@@ -1,25 +1,33 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
+import 'package:qchat/components/CustomButton.dart';
+import 'package:qchat/constants.dart';
 import 'package:qchat/screens/login_screen.dart';
 import 'package:qchat/screens/registration_screen.dart';
 
 class WelcomeScreen extends StatefulWidget {
- static String id = '/';
+  static String id = '/';
   @override
   _WelcomeScreenState createState() => _WelcomeScreenState();
 }
 
-class _WelcomeScreenState extends State<WelcomeScreen> with SingleTickerProviderStateMixin{
- late AnimationController controller;
- late Animation animation;
- @override
+class _WelcomeScreenState extends State<WelcomeScreen>
+    with SingleTickerProviderStateMixin {
+  late AnimationController controller;
+  late Animation animation;
+  dynamic goToPage(String id){
+    Navigator.pushNamed(context, id);
+  }
+  @override
   void initState() {
     super.initState();
     controller = AnimationController(
-      duration: Duration(seconds: 3),
+      duration: Duration(seconds: 1),
       vsync: this,
     );
     // animation = CurvedAnimation(parent: controller, curve: Curves.bounceIn);
-    animation  = ColorTween(begin: Colors.red,end:Colors.blue).animate(controller);
+    animation = ColorTween(begin: Colors.blueGrey, end: Colors.white)
+        .animate(controller);
     controller.forward();
     // animation.addStatusListener((status) {
     //   if(status == AnimationStatus.completed){
@@ -31,17 +39,17 @@ class _WelcomeScreenState extends State<WelcomeScreen> with SingleTickerProvider
     //To avoid the animation to keep running till eternity use the dispose function to destroy the controller once we are off that screen
     // you can use reverse to reverse the effect
     controller.addListener(() {
-      setState(() {
-
-      });
+      setState(() {});
       print(animation.value);
     });
   }
+
   @override
   void dispose() {
     super.dispose();
     controller.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -61,57 +69,26 @@ class _WelcomeScreenState extends State<WelcomeScreen> with SingleTickerProvider
                     child: Image.asset('images/logo.png'),
                   ),
                 ),
-                const Text(
-                  'Flash Chat',
-                  style: TextStyle(
-                    fontSize: 45.0,
-                    fontWeight: FontWeight.w900,
-                    color: Colors.black,
-                  ),
+                AnimatedTextKit(
+                  animatedTexts: [
+                    TypewriterAnimatedText(
+                      'Flash Chat',
+                      textStyle: const TextStyle(
+                        fontSize: 45.0,
+                        fontWeight: FontWeight.w900,
+                        color: Colors.black,
+                      ),
+                      speed: const Duration(milliseconds: 100)
+                    )
+                  ],
                 ),
               ],
             ),
             const SizedBox(
               height: 48.0,
             ),
-            Padding(
-              padding:const EdgeInsets.symmetric(vertical: 16.0),
-              child: Material(
-                elevation: 5.0,
-                color: Colors.lightBlueAccent,
-                borderRadius: BorderRadius.circular(30.0),
-                child: MaterialButton(
-                  onPressed: () {
-                    //Go to login screen.
-                    Navigator.pushNamed(context, LoginScreen.id);
-                  },
-                  minWidth: 200.0,
-                  height: 42.0,
-                  child:const Text(
-                    'Log In',
-                  ),
-                ),
-              ),
-            ),
-            Padding(
-              padding:const EdgeInsets.symmetric(vertical: 16.0),
-              child: Material(
-                color: Colors.blueAccent,
-                borderRadius: BorderRadius.circular(30.0),
-                elevation: 5.0,
-                child: MaterialButton(
-                  onPressed: () {
-                    //Go to registration screen.
-                    Navigator.pushNamed(context, RegistrationScreen.id);
-                  },
-                  minWidth: 200.0,
-                  height: 42.0,
-                  child:const Text(
-                    'Register',
-                  ),
-                ),
-              ),
-            ),
+           CustomButton(routeFunction:goToPage(LoginScreen.id), buttonColor: kLoginButtonColor, text: 'Login'),
+           CustomButton(routeFunction:goToPage(RegistrationScreen.id), buttonColor: kRegisterButtonColor, text: 'Register'),
           ],
         ),
       ),
