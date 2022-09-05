@@ -8,11 +8,44 @@ class WelcomeScreen extends StatefulWidget {
   _WelcomeScreenState createState() => _WelcomeScreenState();
 }
 
-class _WelcomeScreenState extends State<WelcomeScreen> {
+class _WelcomeScreenState extends State<WelcomeScreen> with SingleTickerProviderStateMixin{
+ late AnimationController controller;
+ late Animation animation;
+ @override
+  void initState() {
+    super.initState();
+    controller = AnimationController(
+      duration: Duration(seconds: 3),
+      vsync: this,
+    );
+    // animation = CurvedAnimation(parent: controller, curve: Curves.bounceIn);
+    animation  = ColorTween(begin: Colors.red,end:Colors.blue).animate(controller);
+    controller.forward();
+    // animation.addStatusListener((status) {
+    //   if(status == AnimationStatus.completed){
+    //     controller.reverse(from:1.0);
+    //   }else if(status == AnimationStatus.dismissed){
+    //     controller.forward();
+    //   }
+    // }); loop the animation
+    //To avoid the animation to keep running till eternity use the dispose function to destroy the controller once we are off that screen
+    // you can use reverse to reverse the effect
+    controller.addListener(() {
+      setState(() {
+
+      });
+      print(animation.value);
+    });
+  }
+  @override
+  void dispose() {
+    super.dispose();
+    controller.dispose();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: animation.value,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0),
         child: Column(
