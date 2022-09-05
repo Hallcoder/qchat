@@ -15,7 +15,7 @@ class _WelcomeScreenState extends State<WelcomeScreen>
     with SingleTickerProviderStateMixin {
   late AnimationController controller;
   late Animation animation;
-  dynamic goToPage(String id){
+  dynamic goToPage(BuildContext context,String id){
     Navigator.pushNamed(context, id);
   }
   @override
@@ -87,8 +87,12 @@ class _WelcomeScreenState extends State<WelcomeScreen>
             const SizedBox(
               height: 48.0,
             ),
-           CustomButton(routeFunction:goToPage(LoginScreen.id), buttonColor: kLoginButtonColor, text: 'Login'),
-           CustomButton(routeFunction:goToPage(RegistrationScreen.id), buttonColor: kRegisterButtonColor, text: 'Register'),
+           CustomButton(routeFunction:(){
+             Navigator.pushNamed(context, LoginScreen.id);
+           }, buttonColor: kLoginButtonColor, text: 'Login'),
+           CustomButton(routeFunction:(){
+             Navigator.pushNamed(context, RegistrationScreen.id);
+           }, buttonColor: kRegisterButtonColor, text: 'Register'),
           ],
         ),
       ),
