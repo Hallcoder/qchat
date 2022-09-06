@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "27469937973",
+    "project_id": "qchat-1627e",
+    "storage_bucket": "qchat-1627e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:27469937973:android:4f9bb8721cc28d7eeea07c",
+        "android_client_info": {
+          "package_name": "com.apo3.qchat"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "27469937973-jkh3b77m84nbfnhbsdv0h97vvt9qt5ra.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOU29DKfi_WgS4zq60oc7W09L0YJ5UFAA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "27469937973-jkh3b77m84nbfnhbsdv0h97vvt9qt5ra.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

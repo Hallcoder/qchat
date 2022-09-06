@@ -4,23 +4,20 @@ import 'package:qchat/screens/login_screen.dart';
 import 'package:qchat/screens/registration_screen.dart';
 import 'package:qchat/screens/chat_screen.dart';
 
-void main() => runApp(FlashChat());
+void main() => runApp(const FlashChat());
 
 class FlashChat extends StatelessWidget {
+  const FlashChat({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData.dark().copyWith(
-        textTheme: const TextTheme(
-          bodyText1: TextStyle(color: Colors.black54),
-        ),
-      ),
-      initialRoute: WelcomeScreen.id,
+      initialRoute: ChatScreen.id,
       routes: {
         WelcomeScreen.id: (context) => WelcomeScreen(),
         ChatScreen.id: (context) => ChatScreen(),
         LoginScreen.id: (context) => LoginScreen(),
-        RegistrationScreen.id: (context) => RegistrationScreen(),
+        RegistrationScreen.id: (context) => const RegistrationScreen(),
       },
     );
   }
