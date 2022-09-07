@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:qchat/screens/welcome_screen.dart';
 import 'package:qchat/screens/login_screen.dart';
@@ -10,7 +11,8 @@ class FlashChat extends StatelessWidget {
   const FlashChat({Key? key}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) async{
+    await Firebase.initializeApp();
     return MaterialApp(
       initialRoute: WelcomeScreen.id,
       routes: {
