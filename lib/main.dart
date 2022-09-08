@@ -9,10 +9,12 @@ void main() => runApp(const FlashChat());
 
 class FlashChat extends StatelessWidget {
   const FlashChat({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) async{
+  void initializeApp() async{
     await Firebase.initializeApp();
+  }
+  @override
+  Widget build(BuildContext context) {
+    initializeApp();
     return MaterialApp(
       initialRoute: WelcomeScreen.id,
       routes: {
