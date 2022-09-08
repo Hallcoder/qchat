@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:qchat/components/CustomButton.dart';
 import 'package:qchat/constants.dart';
+import 'chat_screen.dart';
 class LoginScreen extends StatefulWidget {
   static String id = '/login';
 
@@ -9,7 +11,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-
+  late String email;
+  late String password;
+  final FirebaseAuth _auth = FirebaseAuth.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,6 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             TextField(
               onChanged: (value) {
+                email = value;
                 //Do something with the user input.
               },
               decoration:kInputDecoration.copyWith(
@@ -43,6 +48,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             TextField(
               onChanged: (value) {
+                password = value;
                 //Do something with the user input.
               },
               decoration: kInputDecoration.copyWith(
@@ -52,7 +58,17 @@ class _LoginScreenState extends State<LoginScreen> {
             const SizedBox(
               height: 24.0,
             ),
-            CustomButton(routeFunction: (){}, buttonColor: kLoginButtonColor, text: 'Log In')
+            CustomButton(routeFunction: ()async{
+              try{
+              UserCredential newUser = await  _auth.signInWithEmailAndPassword(email: email, password: password);
+              if(newUser != null){
+                Navigator.pushNamed(context,ChatScreen.id);
+              }
+              }catch(e){
+                print(e);
+              }
+
+            }, buttonColor: kLoginButtonColor, text: 'Log In')
             ,
           ],
         ),
